@@ -1,0 +1,46 @@
+version: "3.8"
+
+services:
+  mongodb:
+    image: mongo
+    container_name: mongodb
+    ports:
+      - 27017:27017
+    volumes:
+      - data:/data
+    environment:
+      - MONGO_INITDB_ROOT_USERNAME=rootuser
+      - MONGO_INITDB_ROOT_PASSWORD=rootpass
+
+  mongo-express:
+    image: mongo-express
+    container_name: mongo-express
+    restart: always
+    ports:
+      - 8081:8081
+    environment:
+      - ME_CONFIG_MONGODB_ADMINUSERNAME=rootuser
+      - ME_CONFIG_MONGODB_ADMINPASSWORD=rootpass
+      - ME_CONFIG_MONGODB_SERVER=mongodb
+
+# Pra armazenar os dados:
+volumes:
+  data: {}
+
+# Para que os serviços fiquem na mesma rede e possam se conversar:
+networks:
+  default:
+    name: mongodb_network
+
+# Comandos:
+# docker-compose up
+# rodando mongo no terminal não vai achar, pq ele ta rodando via docker.
+# Conecta no container do mongo: docker exec -it mongo-test bash
+# mongo
+# show dbs
+# use admin
+# db.auth('root', passwordPrompt())
+# digitar example
+# show dbs
+# use novodatabase
+# db.createCollection("testeGabriel")

@@ -9,3 +9,8 @@ class SpringMongodbApplication
 fun main(args: Array<String>) {
 	runApplication<SpringMongodbApplication>(*args)
 }
+
+
+
+
+
